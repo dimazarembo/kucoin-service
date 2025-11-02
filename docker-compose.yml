@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  kucoin-service:
+    image: "kucoin-service:dev"
+    container_name: kucoin-service
+    ports:
+      - "8089:8089"
+    environment:
+      SERVER_PORT: 8089
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8089/actuator/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
